@@ -1,0 +1,28 @@
+name: Pipeline Analítico PsiNet LAB
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Se ejecuta cada 6 horas
+  workflow_dispatch: # Permite ejecución manual desde la web de GitHub
+
+jobs:
+  analisis-psicometrico:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar entorno R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Instalar dependencias de sistema (PostgreSQL)
+        run: sudo apt-get install -y libpq-dev
+
+      - name: Instalar librerías de R
+        run: |
+          Rscript -e 'install.packages(c("DBI", "RPostgres", "jsonlite", "lavaan"))'
+
+      - name: Ejecutar motor estadístico
+        env:
+          SUPABASE_DB_PASS: ${{ secrets.DB_PASSWORD }}
+        run: Rscript scripts/pipeline_psicometrico.R
