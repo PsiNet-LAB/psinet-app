@@ -2,7 +2,7 @@ name: Pipeline Analítico PsiNet LAB
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Se ejecuta cada 6 horas
+    - cron: "0 */6 * * *" # Se ejecuta cada 6 horas
   workflow_dispatch: # Permite ejecución manual desde la web de GitHub
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
         uses: r-lib/actions/setup-r@v2
 
       - name: Instalar dependencias de sistema (PostgreSQL y C++)
-        run: sudo apt-get update && sudo apt-get install -y libpq-dev libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev
+        run: sudo apt-get update && sudo apt-get install -y libpq-dev libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libjpeg-dev libpng-dev libtiff-dev
 
       - name: Instalar librerías de R (Motor GGM)
         run: |
