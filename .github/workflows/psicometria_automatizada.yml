@@ -1,8 +1,6 @@
 name: Pipeline Analítico PsiNet LAB
 
 on:
-  schedule:
-    - cron: "0 */6 * * *" # Se ejecuta cada 6 horas
   workflow_dispatch: # Permite ejecución manual desde la web de GitHub
 
 jobs:
